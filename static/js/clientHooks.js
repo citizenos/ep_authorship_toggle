@@ -12,24 +12,24 @@
  * @see {@link http://etherpad.org/doc/v1.5.7/#index_editbar}
  */
 exports.postToolbarInit = function (hook_name, args) {
-    var editbar = args.toolbar; // toolbar is actually editbar - http://etherpad.org/doc/v1.5.7/#index_editbar
+    const editbar = args.toolbar; // toolbar is actually editbar - http://etherpad.org/doc/v1.5.7/#index_editbar
 
-    var $window = $(window);
-    var $inner = $('iframe[name=ace_outer]').contents().find('iframe[name=ace_inner]').contents();
-    var $docBody = $inner.find('#innerdocbody');
-    var $editorcontainer = $('#editorcontainer');
-    var $editbar = $('#editbar');
+    const $window = $(window);
+    const $inner = $('iframe[name=ace_outer]').contents().find('iframe[name=ace_inner]').contents();
+    const $docBody = $inner.find('#innerdocbody');
+    const $editorcontainer = $('#editorcontainer');
+    const $editbar = $('#editbar');
 
-    var $epAuthorshipToggleAuthorList = $('#epAuthorshipToggleAuthorList');
-    var $epAuthorList = $epAuthorshipToggleAuthorList.find('#authorsList');
+    const $epAuthorshipToggleAuthorList = $('#epAuthorshipToggleAuthorList');
+    const $epAuthorList = $epAuthorshipToggleAuthorList.find('#authorsList');
 
-    var resizeHandler = function() {
+    const resizeHandler = function() {
         $epAuthorshipToggleAuthorList.css('top', $editbar.outerHeight() + 'px');
         $editorcontainer.css('top', $epAuthorshipToggleAuthorList.offset().top + $epAuthorshipToggleAuthorList.outerHeight());
     };
 
     editbar.registerCommand('epAuthorshipToggle', function () {
-        var isVisibleAuthor = $epAuthorshipToggleAuthorList.is(':visible');
+        const isVisibleAuthor = $epAuthorshipToggleAuthorList.is(':visible');
 
         $docBody.toggleClass('authorColors');
 
@@ -44,11 +44,11 @@ exports.postToolbarInit = function (hook_name, args) {
             $epAuthorList.empty();
 
             // TODO: Contains only authors that had edited the Pad before the Pad was opened. Will not update on the fly if new authors are added.
-            var authors = clientVars.collab_client_vars.historicalAuthorData;
-            for (var authorId in authors) {
+            const authors = clientVars.collab_client_vars.historicalAuthorData;
+            for (const authorId in authors) {
                 if (authors.hasOwnProperty(authorId)) {
-                    var author = authors[authorId];
-                    var elem = $('<span class="author"/>')
+                    const author = authors[authorId];
+                    const elem = $('<span class="author"/>')
                         .css('background-color', clientVars.colorPalette[author.colorId])
                         .text(author.name);
                     $epAuthorList.append(elem);

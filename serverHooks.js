@@ -3,18 +3,20 @@
  *
  * Add a button to the toolbar
  *
- * @see {@link http://etherpad.org/doc/v1.5.7/#index_padinittoolbar}
+ * @see {@link http://etherpad.org/doc/v1.6.8/#index_padinittoolbar}
  */
-exports.padInitToolbar = function (hook_name, args) {
-    var toolbar = args.toolbar;
+exports.padInitToolbar = function (hook_name, args, cb) {
+    const toolbar = args.toolbar;
 
-    var button = toolbar.button({
+    const button = toolbar.button({
         command: 'epAuthorshipToggle',
         localizationId: "epAuthorshipToggle.toolbar.toggle.title",
         class: "buttonicon buttonicon-clearauthorship epAuthorshipToggle"
     });
 
     toolbar.registerButton('epAuthorshipToggle', button);
+
+    return cb();
 };
 
 /**
@@ -24,9 +26,10 @@ exports.padInitToolbar = function (hook_name, args) {
  *
  * @see {@link http://etherpad.org/doc/v1.5.7/#index_eejsblock_name}
  */
-var eejs = require('ep_etherpad-lite/node/eejs/');
+const eejs = require('ep_etherpad-lite/node/eejs/');
 exports.eejsBlock_afterEditbar = function (hook_name, args, cb) {
     args.content = args.content + eejs.require("ep_authorship_toggle/templates/authors.ejs");
+
     return cb();
 };
 
@@ -39,6 +42,7 @@ exports.eejsBlock_afterEditbar = function (hook_name, args, cb) {
  */
 exports.eejsBlock_styles = function (hook_name, args, cb) {
     args.content = args.content + eejs.require("ep_authorship_toggle/templates/stylesheets.ejs");
+
     return cb();
 };
 
