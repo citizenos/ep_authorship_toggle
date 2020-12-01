@@ -1,3 +1,6 @@
+'use strict';
+
+const eejs = require('ep_etherpad-lite/node/eejs/');
 /**
  * padInitToolbar hook
  *
@@ -5,18 +8,18 @@
  *
  * @see {@link http://etherpad.org/doc/v1.6.8/#index_padinittoolbar}
  */
-exports.padInitToolbar = function (hook_name, args, cb) {
-    const toolbar = args.toolbar;
+exports.padInitToolbar = (hook, args, cb) => {
+  const toolbar = args.toolbar;
 
-    const button = toolbar.button({
-        command: 'epAuthorshipToggle',
-        localizationId: "epAuthorshipToggle.toolbar.toggle.title",
-        class: "buttonicon buttonicon-clearauthorship epAuthorshipToggle"
-    });
+  const button = toolbar.button({
+    command: 'epAuthorshipToggle',
+    localizationId: 'epAuthorshipToggle.toolbar.toggle.title',
+    class: 'buttonicon buttonicon-clearauthorship epAuthorshipToggle',
+  });
 
-    toolbar.registerButton('epAuthorshipToggle', button);
+  toolbar.registerButton('epAuthorshipToggle', button);
 
-    return cb();
+  return cb();
 };
 
 /**
@@ -26,11 +29,10 @@ exports.padInitToolbar = function (hook_name, args, cb) {
  *
  * @see {@link http://etherpad.org/doc/v1.5.7/#index_eejsblock_name}
  */
-const eejs = require('ep_etherpad-lite/node/eejs/');
-exports.eejsBlock_afterEditbar = function (hook_name, args, cb) {
-    args.content = args.content + eejs.require("ep_authorship_toggle/templates/authors.ejs");
+exports.eejsBlock_afterEditbar = (hook, args, cb) => {
+  args.content += eejs.require('ep_authorship_toggle/templates/authors.ejs');
 
-    return cb();
+  return cb();
 };
 
 /**
@@ -40,9 +42,8 @@ exports.eejsBlock_afterEditbar = function (hook_name, args, cb) {
  *
  * @see {@link http://etherpad.org/doc/v1.5.7/#index_eejsblock_name}
  */
-exports.eejsBlock_styles = function (hook_name, args, cb) {
-    args.content = args.content + eejs.require("ep_authorship_toggle/templates/stylesheets.ejs");
+exports.eejsBlock_styles = (hook, args, cb) => {
+  args.content += eejs.require('ep_authorship_toggle/templates/stylesheets.ejs');
 
-    return cb();
+  return cb();
 };
-
