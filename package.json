@@ -1,6 +1,6 @@
 {
   "name": "ep_authorship_toggle",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Toggle authorship colors on and off.",
   "author": {
     "name": "Tiblu"
