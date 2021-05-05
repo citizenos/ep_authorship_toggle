@@ -3,7 +3,8 @@
         {
             "name": "ep_authorship_toggle",
             "client_hooks": {
-                "postToolbarInit": "ep_authorship_toggle/static/js/clientHooks:postToolbarInit"
+                "postToolbarInit": "ep_authorship_toggle/static/js/clientHooks:postToolbarInit",
+                "aceSetAuthorStyle": "ep_authorship_toggle/static/js/clientHooks:aceSetAuthorStyle"
             },
             "hooks": {
                 "padInitToolbar": "ep_authorship_toggle/serverHooks:padInitToolbar",

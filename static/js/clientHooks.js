@@ -68,3 +68,18 @@ exports.postToolbarInit = (hook, args, cb) => {
 
   return cb();
 };
+
+exports.aceSetAuthorStyle = (hook, context) => {
+  const authors = clientVars.collab_client_vars.historicalAuthorData;
+  const author = authors[context.author];
+  if (author && author.colorId) {
+    const bgColor = clientVars.colorPalette[author.colorId];
+
+    const authorStyle = context.dynamicCSS.selectorStyle(context.authorSelector);
+    const parentAuthorStyle = context.parentDynamicCSS.selectorStyle(context.authorSelector);
+    authorStyle.backgroundColor = bgColor;
+    parentAuthorStyle.backgroundColor = bgColor;
+
+    return 1;
+  }
+}
