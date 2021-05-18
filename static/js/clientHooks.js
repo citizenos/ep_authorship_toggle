@@ -47,7 +47,7 @@ exports.postToolbarInit = (hook, args, cb) => {
       // Will not update on the fly if new authors are added.
       const authors = clientVars.collab_client_vars.historicalAuthorData;
       for (const authorId in authors) {
-        if (authors.hasOwnProperty(authorId)) {
+        if (authors[authorId]) {
           const author = authors[authorId];
           const elem = $('<span class="author"/>')
               .css('background-color', clientVars.colorPalette[author.colorId])
@@ -82,4 +82,4 @@ exports.aceSetAuthorStyle = (hook, context) => {
 
     return 1;
   }
-}
+};
